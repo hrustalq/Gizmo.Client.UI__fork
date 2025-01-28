@@ -1,0 +1,18 @@
+﻿@namespace Gizmo.Client.UI.Components
+@inherits CustomDOMComponentBase
+
+<div class="giz-carousel">
+	<div class="giz-carousel__content">
+		<CascadingValue Value="@this" IsFixed="true">
+			@ChildContent
+		</CascadingValue>
+	</div>
+	@if (ShowIndicator)
+	{
+		<div class="giz-carousel__navigation">
+			<div class="giz-carousel__navigation__indicators">
+				<CarouselIndicator Size="@_items.Count" SelectedIndex="@SelectedIndex" SelectedIndexChanged="SelectedIndexChangedHandler" />
+			</div>
+		</div>
+	}
+</div>

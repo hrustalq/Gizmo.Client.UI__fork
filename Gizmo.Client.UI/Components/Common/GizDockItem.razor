@@ -1,0 +1,19 @@
+﻿@namespace Gizmo.Client.UI.Components
+@inherits CustomDOMComponentBase
+@using Gizmo.Client.UI.View;
+
+<div class="giz-dock-item"
+	 @onmouseover="OnMouseOverHandler"
+	 @onmouseout="OnMouseOutHandler">
+
+    <UniversalExecutable @key="Executable.ExecutableId" ExecutableId="@Executable.ExecutableId" ShowProgressBar="true" />
+
+    <div class="giz-dock-item-tooltip-wrapper @(_isOpen ? "giz-dock-item-tooltip-wrapper--visible" : "")"
+         @onmouseover="OnMouseOverTooltipHandler"
+         @onmouseout="OnMouseOutTooltipHandler">
+
+        <GizDockItemTooltip @key="Executable.ExecutableId" Executable="@Executable" />
+
+    </div>
+	
+</div>

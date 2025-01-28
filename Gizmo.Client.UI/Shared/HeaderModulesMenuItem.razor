@@ -1,0 +1,46 @@
+﻿@namespace Gizmo.Client.UI
+@inherits ComponentBase
+
+<NavLink href="@MetaData.DefaultRoute"
+         Match=@((NavLinkMatch)MetaData.DefaultRouteMatch)>
+
+    @switch (MetaData.Guid)
+    {
+        case KnownModules.MODULE_PROFILE:
+
+            <Icon Size="IconSizes.Large" SVGIcon="Icons.User_Client" />
+
+            break;
+            
+        case KnownModules.MODULE_APPS:
+
+            <Icon Size="IconSizes.Large" SVGIcon="Icons.Gamepad_Client" />
+
+            break;
+
+        case KnownModules.MODULE_HOME:
+
+            <Icon Size="IconSizes.Large" SVGIcon="Icons.Home_Client" />
+
+            break;
+
+        case KnownModules.MODULE_SHOP:
+
+            <Icon Size="IconSizes.Large" SVGIcon="Icons.ShoppingCart_Client" />
+
+            break;
+
+        default:
+            break;
+    }
+
+    @if (!string.IsNullOrWhiteSpace(MetaData.TitleLocalizationKey))
+    {
+        <span>@LocalizationService.GetStringUpper(MetaData.TitleLocalizationKey)</span>
+    }
+    else
+    {
+        <span>@(MetaData.Title ?? LocalizationService.GetString("GIZ_GEN_UNSET_STRING_VALUE"))</span>
+    }
+
+</NavLink>

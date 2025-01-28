@@ -1,0 +1,51 @@
+﻿@namespace Gizmo.Client.UI.Components
+@inherits CustomDOMComponentBase
+@using System.Globalization
+
+<div class="giz-product-card bundle"
+     @onclick="OpenDetails">
+    <div class="giz-product-card__content">
+              
+        <div class="giz-product-card__content__image">
+            <div class="giz-product-card__content__image__hovered">
+                <div class="giz-product-card__content__image__hovered__header">
+
+                    <div class="giz-product-card__content--hovered">
+                        <ProductBundleCardHover @key="Product.Id" Product="@Product" />
+                    </div>
+
+                    <div class="giz-product-card-award-indicator">
+                        @if (Product.UnitPointsAward > 0)
+                        {
+                            <PointsAward2Icon />
+                        }
+                    </div>
+
+                </div>
+            </div>
+
+            <GizImage ImageType="Gizmo.UI.ImageType.ProductDefault" ImageId="@Product.DefaultImageId" ImageFitType="ImageFitType.Cover">
+                <EmptyResultPlaceholder>
+                    <div class="giz-default-image">
+                        <img src="_content/Gizmo.Client.UI/img/no-product-image.svg" alt='loading' />
+                    </div>
+                </EmptyResultPlaceholder>
+            </GizImage>
+
+        </div>
+
+        <div class="giz-product-card__content__details">
+            <div class="giz-product-card__price">
+                <ProductCardPrice @key="Product.Id" Product="@Product" />
+            </div>
+            <div class="giz-product-card__title">
+                @Product.Name
+            </div>
+            <div class="giz-product-card__host-group">
+            </div>
+        </div>
+        <div class="giz-product-card__content__footer">
+            <ProductQuantityPicker @key="Product.Id" ProductId="@Product.Id" OnClick="@Ignore" />
+        </div>
+    </div>
+</div>

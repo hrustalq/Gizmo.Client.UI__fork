@@ -1,0 +1,145 @@
+﻿using Gizmo.Web.Api.Models.Abstractions;
+
+using MessagePack;
+
+using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace Gizmo.Web.Api.Models
+{
+    /// <summary>
+    /// Operator.
+    /// </summary>
+    [Serializable, MessagePackObject]
+    public sealed class OperatorModelCreate : IOperatorModel, IUriParametersQuery
+    {
+        #region PROPERTIES
+
+        /// <summary>
+        /// The initial password for the operator, if left empty no password will be set.
+        /// </summary>
+        [MessagePack.Key(0)]
+        [StringLength(24)]
+        public string? Password { get; set; }
+
+        #region UsersOperator
+
+        /// <summary>
+        /// The username of the operator.
+        /// </summary>
+        [MessagePack.Key(1)]
+        [StringLength(30)]
+        public string Username { get; set; } = null!;
+
+        /// <summary>
+        /// The email of the operator.
+        /// </summary>
+        [MessagePack.Key(2)]
+        [StringLength(254)]
+        [EmailNullEmptyValidation]
+        public string? Email { get; set; }
+
+        #endregion
+
+        #region User
+
+        /// <summary>
+        /// The first name of the operator.
+        /// </summary>
+        [MessagePack.Key(3)]
+        [StringLength(45)]
+        public string? FirstName { get; set; }
+
+        /// <summary>
+        /// The last name of the operator.
+        /// </summary>
+        [StringLength(45)]
+        [MessagePack.Key(4)]
+        public string? LastName { get; set; }
+
+        /// <summary>
+        /// The birth date of the operator.
+        /// </summary>
+        [MessagePack.Key(5)]
+        public DateTime? BirthDate { get; set; }
+
+        /// <summary>
+        /// The address of the operator.
+        /// </summary>
+        [MessagePack.Key(6)]
+        [StringLength(255)]
+        public string? Address { get; set; }
+
+        /// <summary>
+        /// The city of the operator.
+        /// </summary>
+        [MessagePack.Key(7)]
+        [StringLength(45)]
+        public string? City { get; set; }
+
+        /// <summary>
+        /// The country of the operator.
+        /// </summary>
+        [MessagePack.Key(8)]
+        [StringLength(45)]
+        public string? Country { get; set; }
+
+        /// <summary>
+        /// The post code of the operator.
+        /// </summary>
+        [MessagePack.Key(9)]
+        [StringLength(20)]
+        public string? PostCode { get; set; }
+
+        /// <summary>
+        /// The phone number of the operator.
+        /// </summary>
+        [MessagePack.Key(10)]
+        [StringLength(20)]
+        public string? Phone { get; set; }
+
+        /// <summary>
+        /// The mobile phone number of the operator.
+        /// </summary>
+        [MessagePack.Key(11)]
+        [StringLength(20)]
+        public string? MobilePhone { get; set; }
+
+        /// <summary>
+        /// The sex of the operator.
+        /// </summary>
+        [MessagePack.Key(12)]
+        [EnumValueValidation]
+        public Sex Sex { get; set; }
+
+        /// <summary>
+        /// Whether the operator is deleted.
+        /// </summary>
+        [MessagePack.Key(13)]
+        public bool IsDeleted { get; set; }
+
+        /// <summary>
+        /// Whether the operator is disabled.
+        /// </summary>
+        [MessagePack.Key(14)]
+        public bool IsDisabled { get; set; }
+
+        /// <summary>
+        /// The SmartCard UID of the operator.
+        /// </summary>
+        [MessagePack.Key(15)]
+        [StringLength(255)]
+        public string? SmartCardUid { get; set; }
+
+        /// <summary>
+        /// The identification number of the operator.
+        /// </summary>
+        [MessagePack.Key(16)]
+        [StringLength(255)]
+        public string Identification { get; set; } = null!;
+
+        #endregion
+
+        #endregion
+    }
+}

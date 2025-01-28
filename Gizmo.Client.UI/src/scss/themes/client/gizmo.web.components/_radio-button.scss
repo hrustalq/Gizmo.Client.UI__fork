@@ -1,0 +1,39 @@
+//=============== RadioButton ================//
+
+.giz-radio-button {
+    [#{$client-theme-comp-attr}] & {
+        & input {
+            & + label {
+            }
+
+            &:checked + label {
+            }
+
+            & + label:before {
+                background-color: transparent;
+                border: 0.1rem solid rgba(246, 251, 253, 0.28);
+            }
+
+            &:checked + label:before {
+                background-color: transparent;
+                border-color: #0078D2;
+            }
+
+            &.disabled + label:before, &[disabled] + label:before {
+                //TODO: A background-color: $gray-color-theme-dark;
+            }
+
+            &.disabled + label, &[disabled] + label {
+            }
+
+            &:checked + label:after {
+                top: 50%;
+                transform: translateY(-50%);
+                left: 0.8rem;
+                width: 0.8rem;
+                height: 0.8rem;
+                background-color: #0078D2;
+            }
+        }
+    }
+}

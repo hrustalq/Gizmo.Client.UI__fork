@@ -1,0 +1,51 @@
+﻿@namespace Gizmo.Client.UI.Components
+@inherits CustomDOMComponentBase
+@using Gizmo.Client.UI.View;
+
+<ComboButton Progress="@_appExeExecutionViewState.Progress"
+             Color="@(_appExeExecutionViewState.IsRunning && !_appExeViewState.Options.HasFlag(ExecutableOptionType.MultiRun) ? ButtonColors.Danger : ButtonColors.Accent)"
+             Variant="@(_appExeExecutionViewState.IsActive ? ButtonVariants.Progress : ButtonVariants.Fill)"
+             Size="@Size"
+             IsFullWidth="@IsFullWidth"
+             OnClickMainButton="@OnClickMainButtonHandler"
+             OpenDirection="PopupOpenDirections.Cursor"
+             @bind-IsOpen="_isOpen">
+    <ChildContent>
+        @if (_appExeExecutionViewState.IsActive)
+        {
+            @if (_appExeExecutionViewState.IsIndeterminate)
+            {
+                <Spinner />
+            }
+            else
+            {
+                <div>@LocalizationService.GetString("GIZ_APPS_CANCEL")</div>
+            }
+        }
+        else if (_appExeExecutionViewState.IsRunning && !_appExeViewState.Options.HasFlag(ExecutableOptionType.MultiRun))
+        {
+            <div>@LocalizationService.GetString("GIZ_APPS_TERMINATE")</div>
+        }
+        else
+        {
+            <div>@LocalizationService.GetString("GIZ_APPS_LAUNCH")</div>
+        }
+    </ChildContent>
+    <DropDownItems>
+
+        <ListItem>
+            <CheckBox Label="@LocalizationService.GetString("GIZ_APPS_AUTO_START")" Class="giz-app-autostart" IsChecked="@_appExeViewState.AutoLaunch" IsCheckedChanged="OnAutoStartChange" />
+        </ListItem>
+
+        <ListItem SVGIcon="Icons.Restart_Client" OnClick="OnRepairClick">
+            @LocalizationService.GetString("GIZ_APPS_REPAIR")
+        </ListItem>
+
+        <ExecutableLaunchButtonPersonalFiles ExecutableId="@ExecutableId" @key="ExecutableId" OnClick="@OnClickPersonalFileButtonHandler" />
+        
+        <ListItem SVGIcon="Icons.Terminate_Client" OnClick="OnTerminateClick">
+            @LocalizationService.GetString("GIZ_APPS_TERMINATE")
+        </ListItem>
+
+    </DropDownItems>
+</ComboButton>

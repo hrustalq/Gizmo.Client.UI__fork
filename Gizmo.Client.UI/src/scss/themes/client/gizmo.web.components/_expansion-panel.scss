@@ -1,0 +1,12 @@
+//=============== ExpansionPanel ================//
+
+.giz-expansion-panel {
+    [#{$client-theme-comp-attr}] & {
+        &__header {
+            &__content {
+                @include font-h5-theme-client($font-weight-bold-theme-client);
+                color: #FAFAFA;
+            }
+        }
+    }
+}

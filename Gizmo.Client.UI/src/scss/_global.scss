@@ -1,0 +1,59 @@
+//=============== Client UI Global Style ================//
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 10px;
+    line-height: 1.4;
+}
+
+body {
+    user-select: none;
+}
+
+main {
+    position: relative;
+}
+
+img, svg {
+    vertical-align: middle;
+}
+
+@media (min-width: 1921px) {
+    html {
+        font-size: 11px;
+    }
+}
+
+@media (min-width: 2561px) {
+    html {
+        font-size: 13px;
+    }
+}
+
+.giz-registration-form-input {
+    margin-bottom: 0.4rem;
+}
+
+.giz-form-input {
+    position: relative;
+    margin-bottom: 1.6rem;
+}
+
+.giz-form-input-columns {
+    display: flex;
+    gap: 1.6rem;
+
+    & > div {
+        flex: 1;
+    }
+}
+
+//Compo.razor
+.compo-test {
+    margin-bottom: 2.0rem;
+}

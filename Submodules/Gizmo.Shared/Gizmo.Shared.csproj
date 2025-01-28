@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<PackageProjectUrl>https://www.gizmopowered.net/</PackageProjectUrl>
+		<SignAssembly>false</SignAssembly>
+		<RepositoryUrl>https://github.com/GAMP/Gizmo.Shared</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<Authors>NETProjects</Authors>
+		<Company>NETProjects</Company>
+		<Product>Gizmo</Product>
+		<Description>Gizmo shared code library. The library contains code shared between all of Gizmo modules.</Description>
+		<Copyright>NETProjects</Copyright>
+		<RepositoryType>git</RepositoryType>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<PackageIcon>package_icon.png</PackageIcon>
+		<Version>1.0.5.0</Version>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="Resources\package_icon.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>		
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
+		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+		<PackageReference Include="MessagePack" Version="2.3.85" />
+	</ItemGroup>
+
+</Project>

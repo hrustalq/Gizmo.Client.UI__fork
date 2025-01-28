@@ -1,0 +1,37 @@
+﻿@namespace Gizmo.Client.UI.Shared
+@inherits CustomDOMComponentBase
+
+<div class="giz-dropdown-menu @(_isOpen ? "open" : "")"
+     id="@Id"
+     @ref="@Ref">
+    <div class="giz-dropdown-menu__content giz-menu-notifications">
+        <div class="giz-menu-notifications__header">
+            @LocalizationService.GetString("GIZ_NOTIFICATIONS_TITLE")
+        </div>
+        <div class="giz-menu-notifications__body giz-scrollbar--v">
+
+            @if (ViewState.Dismissed != null && ViewState.Dismissed.Count() > 0)
+            {
+                @foreach (var controller in ViewState.Dismissed)
+                {
+                    <div class="giz-notification-wrapper">
+                        <DynamicComponent Parameters="controller.Parameters" Type="controller.ComponentType" @key=controller.Identifier></DynamicComponent>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="giz-menu-notification-default-item-wrapper">
+                    <div class="giz-empty-state">
+                        <div class="giz-empty-state__title">@LocalizationService.GetString("GIZ_NOTIFICATIONS_NO_NEW_NOTIFICATIONS")</div>
+                        <div class="giz-empty-state__text">@LocalizationService.GetString("GIZ_NOTIFICATIONS_NO_NEW_NOTIFICATIONS_MESSAGE")</div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="giz-menu-notifications__footer">
+            <div class="giz-menu-notifications__footer__action" @onclick="AcknowledgeAll">@LocalizationService.GetString("GIZ_NOTIFICATIONS_MARK_ALL_AS_READ")</div>
+        </div>
+    </div>
+</div>

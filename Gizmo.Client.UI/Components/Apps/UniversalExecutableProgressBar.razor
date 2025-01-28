@@ -1,0 +1,21 @@
+﻿@namespace Gizmo.Client.UI.Components
+@inherits CustomDOMComponentBase
+@using Gizmo.Client.UI.View;
+
+<div class="giz-universal-executable-progress-bar">
+    @if (_appExeExecutionViewState.IsActive)
+    {
+        @if (_appExeExecutionViewState.IsIndeterminate)
+        {
+            <ProgressBar IsIndeterminate="true" />
+        }
+        else
+        {
+            <ProgressBar Value="@_appExeExecutionViewState.Progress" />
+        }
+    }
+    else if (_appExeExecutionViewState.IsRunning)
+    {
+        <div class="running"></div>
+    }
+</div>

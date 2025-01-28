@@ -1,0 +1,74 @@
+﻿@inherits LayoutComponentBase
+@using Gizmo.Client.UI.ViewModels
+@using Microsoft.Extensions.Options
+
+@if (!string.IsNullOrEmpty(ClientUIOptions.Value.Skin))
+{
+    <HeadContent>
+        <link href="css/@ClientUIOptions.Value.Skin" rel="stylesheet" />
+    </HeadContent>
+}
+
+<main client-theme="true">
+    <div class="giz-main-container">
+        <div class="giz-login__adv">
+            @if (LoginRotatorViewState.IsEnabled)
+            {
+                <Layout_LoginRotator />
+            }
+            else
+            {
+                <Layout_LoginWallpaper />
+            }
+
+            <div class="giz-login__adv__header">
+                <div class="giz-nav-logo">
+                    @*<div>
+                        <img alt="loading">
+                    </div>*@
+                </div>
+                <div class="giz-nav-title"><HostNumber /></div>
+            </div>
+
+            <div class="giz-login__adv__body">
+                @*<Carousel Title="Daily News" ShowIndicator="true" Interval="5000">
+                    @if (NewsFeeds != null)
+                    {
+                        @foreach (var item in NewsFeeds)
+                        {
+                            <CarouselItem>
+                                @if (item.Type == NewsFeedTypes.Media)
+                                {
+                                    var mediaFeed = (MediaFeedViewModel)item;
+                                    <div class="giz-login-adv">
+                                        <div class="giz-login-adv__image">
+                                            <img src="@mediaFeed.Thumb" alt="Image" />
+                                        </div>
+                                        <div class="giz-login-adv__text">@mediaFeed.Title</div>
+                                    </div>
+                                }
+                            </CarouselItem>
+                        }
+                    }
+                </Carousel>*@
+            </div>
+
+            <div class="giz-login__adv__footer">
+                <ClientLanguageMenu />
+
+                <div class="giz-server">
+                    <Layout_LoginServerConnection />
+                    <div class="giz-version">
+                        <div class="giz-version__title">@LocalizationService.GetString("GIZ_SYSTEM_VERSION")</div>
+                        <div class="giz-version__version">@ClientVersionViewState.Version</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="giz-login__login">
+            @Body
+        </div>
+    </div>
+    <DialogHost />
+    <Layout_LoginLock />
+</main>

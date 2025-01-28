@@ -1,0 +1,69 @@
+﻿@namespace Gizmo.Client.UI.Components
+@inherits CustomDOMComponentBase
+
+<div class="@Class @ClassName" @onclick="OnClickHandler">
+
+    @if (_advertisementViewState.IsCustomTemplate)
+    {
+        <div class="giz-ads-carousel-item__content">
+            <HtmlString 
+                Content="@_advertisementViewState.Body"
+                ContentParameters="@_contentParameters" />)
+        </div>
+    }
+    else
+    {
+        <div class="giz-ads-carousel-item__image">
+            @if (_advertisementViewState.ThumbnailUrl is not null)
+            {
+                <img src="@_advertisementViewState.ThumbnailUrl" onerror='this.style.display = "none"' />
+                <img src="_content/Gizmo.Client.UI/img/broken-image.svg" alt='loading' class="giz-broken-image" />
+            }
+        </div>
+        
+        <div class="giz-ads-carousel-item__content">
+            <div class="giz-ads-carousel-item__content__body">
+                @(new MarkupString(_advertisementViewState.Body))
+            </div>
+            <div class="giz-ads-carousel-item__content__actions">
+                <div>
+                    @if (_advertisementViewState.Command is not null)
+                    {
+                        <Button 
+                                Size="ButtonSizes.Large"
+                                Variant="ButtonVariants.Fill"
+                                Color="ButtonColors.Primary"
+                                LeftSVGIcon="@GetCommandIcon()"
+                                Text="@GetCommandName()"
+                                Class="giz-ads-carousel-item-command"
+                                @onclick="ExecuteCommandAsync" />
+                    }
+                    else if (_advertisementViewState.Url is not null)
+                    {
+                        <Button 
+                                Size="ButtonSizes.Large"
+                                Variant="ButtonVariants.Fill"
+                                Color="ButtonColors.Primary"
+                                Text="@LocalizationService.GetString("GIZ_GEN_VIEW_DETAILS")"
+                                Class="giz-ads-carousel-item-command"
+                                @onclick="ViewDetailsAsync" />
+                    }
+                </div>
+
+                <div>
+                    @if(_advertisementViewState.MediaUrlType != AdvertisementMediaUrlType.None)
+                    {
+                        <Button 
+                                Size="ButtonSizes.Large"
+                                Variant="ButtonVariants.Fill"
+                                Color="ButtonColors.Primary"
+                                LeftSVGIcon="Icons.Video_Client"
+                                Class="giz-ads-carousel-item-command giz-ads-carousel-item-command--media"
+                                @onclick="ShowMediaDialogAsync"/>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

@@ -1,0 +1,20 @@
+﻿@namespace Gizmo.Client.UI.Components
+@inherits CustomDOMComponentBase
+
+<div class="giz-news-rotator-wrapper">
+    <div class="giz-news-rotator"
+         @onmouseover="OnMouseOverHandler"
+         @onmouseout="OnMouseOutHandler">
+        @if (ViewState.IsInitializing)
+        {
+            <Spinner />
+        }
+        else if (ViewState.IsInitialized == true)
+        {
+            @if (ViewState.CurrentFeed != null)
+            {
+                <NewsRotatorItem Image="@ViewState.CurrentFeed.Image.Url" Title="@ViewState.CurrentFeed.Title" Summary="@ViewState.CurrentFeed.Summary" Url="@ViewState.CurrentFeed.Link?.Url" ChannelImage="@ViewState.CurrentFeedChannel?.Image?.Url" />
+            }
+        }
+    </div>
+</div>

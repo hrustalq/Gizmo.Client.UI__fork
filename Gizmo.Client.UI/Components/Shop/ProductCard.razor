@@ -1,0 +1,20 @@
+﻿@namespace Gizmo.Client.UI.Components
+@inherits CustomDOMComponentBase
+
+@if (Product != null)
+{
+    @switch (Product.ProductType)
+    {
+        case ProductType.Product:
+            <ProductSimpleCard Product="@Product" />
+            break;
+
+        case ProductType.ProductBundle:
+            <ProductBundleCard Product="@Product" />
+            break;
+
+        case ProductType.ProductTime:
+            <ProductTimeCard Product="@Product" />
+            break;
+    }
+}

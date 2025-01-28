@@ -1,0 +1,20 @@
+﻿@namespace Gizmo.Client.UI.Shared
+@inherits CustomDOMComponentBase
+
+<div class="giz-dropdown-menu @(_isOpen ? "open" : "")"
+     id="@Id"
+     @ref="@Ref">
+    <div class="giz-dropdown-menu__content giz-active-apps">
+        <div class="giz-active-apps__header">
+            <div class="giz-heading">@LocalizationService.GetString("GIZ_ACTIVE_APPS_TITLE")</div>
+        </div>
+        <div class="giz-active-apps__body giz-scrollbar--v">
+            <table>
+                @foreach (var executable in ViewState.Executables)
+                {
+                    <MenuActiveApplicationCard Executable="@executable" />
+                }
+            </table>
+        </div>
+    </div>
+</div>

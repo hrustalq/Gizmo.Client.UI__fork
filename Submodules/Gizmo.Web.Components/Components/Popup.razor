@@ -1,0 +1,32 @@
+﻿@namespace Gizmo.Web.Components
+@inherits CustomDOMComponentBase
+
+@if (OpenDirection != PopupOpenDirections.Cursor)
+{
+    <div class="@Class @ClassName"
+         style="@StyleValue @Style"
+         @ref="@Ref"
+         @onclick="ClickInsidePopup"
+         @onfocusout="OnFocusOutHandler"
+         tabindex="-1">
+        @ChildContent
+    </div>
+
+    <Overlay Visible="@IsOpen"
+             @onclick="ClickOutsidePopup">
+    </Overlay>
+}
+else
+{
+    <div class="@PopupWrapperClassName" style="@PopupWrapperStyleValue" @onclick="ClickOutsidePopup">
+        <div class="@Class @ClassName"
+             style="@StyleValue @Style"
+             @ref="@Ref"
+             @onclick="ClickInsidePopup"
+             @onclick:stopPropagation="true"
+             @onfocusout="OnFocusOutHandler"
+             tabindex="-1">
+            @ChildContent
+        </div>
+    </div>
+}

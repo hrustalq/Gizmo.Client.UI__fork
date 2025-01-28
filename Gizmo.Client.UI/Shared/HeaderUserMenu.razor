@@ -1,0 +1,20 @@
+﻿@namespace Gizmo.Client.UI
+@inherits CustomDOMComponentBase
+
+<div class="giz-header__user-menu">
+    <HeaderUserBalance />
+
+    @if (UserOnlineDepositViewState.IsEnabled)
+    {
+        <HeaderUserMenuUserOnlineDeposit @bind-IsOpen="_userOnlineDepositIsOpen" @onclick="ToggleUserOnlineDeposit" />
+    }
+
+    <HeaderUserMenuActiveApps @bind-IsOpen="_activeAppsIsOpen" @onclick="ToggleActiveApps" />
+    @*<div class="giz-header__user-menu-item">
+        <button class="user-menu-item-button--box">
+            <Icon SVGIcon="Icons.ContactSupport_Client" />
+        </button>
+    </div>*@
+    <HeaderUserMenuNotifications @bind-IsOpen="_notificationsIsOpen" @onclick="ToggleNotifications" />
+    <HeaderUserMenuUserLinks @bind-IsOpen="_userLinksIsOpen" @onclick="ToggleUserLinks" />
+</div>

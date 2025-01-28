@@ -1,0 +1,171 @@
+﻿@namespace Gizmo.Client.UI.Pages
+@inherits CustomDOMComponentBase
+@using Gizmo.Client.UI.ViewModels
+
+<div class="giz-product-details-wrapper">
+    <div class="giz-product-details">
+        <div class="giz-product-details__product giz-scrollbar--v">
+            <div class="giz-product-details__product__navigation">
+                <div @onclick="OnClickBackButtonHandler">
+                    <div class="giz-product-details__product__navigation__icon">
+                        <Icon SVGIcon="Icons.ArrowLeftLong_Client" />
+                    </div>
+                    <div class="giz-product-details__product__navigation__label">
+                        @LocalizationService.GetString("GIZ_GEN_BACK")
+                    </div>
+                </div>
+            </div>
+            <div class="giz-product-details__product__info">
+                <div class="giz-product-details__product__info__image">
+                    <GizImage ImageType="Gizmo.UI.ImageType.ProductDefault" ImageId="@ViewState.Product?.DefaultImageId" ImageFitType="ImageFitType.Cover">
+                        <EmptyResultPlaceholder>
+                            @if (@ViewState.Product?.ProductType == ProductType.ProductTime)
+                            {
+                                <div class="giz-product-time-image-wrapper">
+                                    <div class="giz-product-time-image">
+                                        <div class="giz-default-image">
+                                            <img src="_content/Gizmo.Client.UI/img/@ProductHelpers.GetProductTimeImage(ViewState.Product)" alt='loading' />
+                                        </div>
+                                        <div class="giz-product-time-image__time">
+                                            <div class="giz-product-time-image__time__number">@ProductHelpers.GetProductTimeNumber(ViewState.Product)</div>
+                                            <div class="giz-product-time-image__time__text">@ProductHelpers.GetProductTimeText(ViewState.Product, LocalizationService)</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="giz-default-image">
+                                    <img src="_content/Gizmo.Client.UI/img/no-product-image.svg" alt='loading' />
+                                </div>
+                            }
+                        </EmptyResultPlaceholder>
+                    </GizImage>
+                </div>
+                <div class="giz-product-details__product__info__basic">
+                    <div class="giz-product-details__product__info__basic__category">
+                        @_userProductGroupViewState.Name
+                    </div>
+                    <div class="giz-product-details__product__info__basic__title">
+                        @ViewState.Product?.Name
+                    </div>
+                    <ProductTimeHostGroups @key="ProductId" Product="@ViewState.Product" />
+                    <div class="giz-product-details__product__info__basic__description">
+                        @ViewState.Product?.Description
+                    </div>
+                    <div class="giz-product-details__product__info__basic__action">
+                        <div class="giz-product-details__product__info__basic__action__price">
+                            <ProductCardPrice @key="ProductId" Product="@ViewState.Product" />
+                        </div>
+                        <ProductQuantityPicker @key="ProductId" ProductId="@ProductId" Size="ButtonSizes.ExtraLarge" IsFullWidth="false" />
+                    </div>
+                </div>
+                @if (ViewState.Product != null)
+                {
+                    <div class="giz-product-details__product__info__additional">
+                        @if (ViewState.Product.PurchaseAvailability != null || (ViewState.Product.ProductType == ProductType.ProductTime && ViewState.Product.TimeProduct.UsageAvailability != null))
+                        {
+                            <div class="giz-product-details__product__info__additional__availability">
+                                @if (ViewState.Product.PurchaseAvailability != null)
+                                {
+                                    <div class="giz-product-availability">
+                                        <div class="giz-product-availability__title">
+                                            @LocalizationService.GetString("GIZ_PRODUCT_TIME_EXPIRATION_BUYING_TIME")
+                                        </div>
+                                        <div class="giz-product-availability__body">
+                                            @foreach (var item in ProductHelpers.GetPurchaseAvailabilities(ViewState.Product, !_showMore, LocalizationService))
+                                            {
+                                                <div class="giz-product-availability-day">@item</div>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                                @if (ViewState.Product.ProductType == ProductType.ProductTime && ViewState.Product.TimeProduct.UsageAvailability != null)
+                                {
+                                    <div class="giz-product-availability">
+                                        <div class="giz-product-availability__title">
+                                            @LocalizationService.GetString("GIZ_PRODUCT_TIME_EXPIRATION_ACTION_TIME")
+                                        </div>
+                                        <div class="giz-product-availability__body">
+
+                                            @foreach (var item in ProductHelpers.GetUsageAvailabilities(ViewState.Product, !_showMore, LocalizationService))
+                                            {
+                                                <div class="giz-product-availability-day">@item</div>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                                
+                                @if (_showMore)
+                                {
+                                    <div class="giz-product-availability-show-more" @onclick="ToggleMore">
+                                        <span>@LocalizationService.GetString("GIZ_PRODUCT_DETAILS_LESS")</span>
+                                        <Icon SVGIcon="Icons.ArrowUp" />
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="giz-product-availability-show-more" @onclick="ToggleMore">
+                                        <span>@LocalizationService.GetString("GIZ_PRODUCT_DETAILS_MORE")</span>
+                                        <Icon SVGIcon="Icons.ArrowDown" />
+                                    </div>
+                                }
+                            </div>
+                        }
+                        @if (ViewState.Product.ProductType == ProductType.ProductTime && ViewState.Product.TimeProduct.ExpirationOptions != ProductTimeExpirationOptionType.None)
+                        {
+                            <div class="giz-product-details__product__info__additional__expirations">
+                                <div class="giz-product-details__product__info__additional__expirations__header">@LocalizationService.GetString("GIZ_PRODUCT_TIME_EXPIRES_AFTER")</div>
+                                <div class="giz-product-details__product__info__additional__expirations__body">
+
+                                    @if (ViewState.Product.TimeProduct.ExpirationOptions.HasFlag(ProductTimeExpirationOptionType.ExpireAtDayTime))
+                                    {
+                                        <div class="giz-product-expiration">@ProductHelpers.GetDayTimeFromMinute(ViewState.Product.TimeProduct.ExpireAtDayTimeMinute)<Icon SVGIcon="Icons.Info_Client" Size="IconSizes.Small" /></div>
+                                    }
+                                
+                                    @if (ViewState.Product.TimeProduct.ExpirationOptions.HasFlag(ProductTimeExpirationOptionType.ExpireAfterTime))
+                                    {
+                                        <div class="giz-product-expiration">@ProductHelpers.GetExpiresAfterText(ViewState.Product.TimeProduct, LocalizationService)<Icon SVGIcon="Icons.Info_Client" Size="IconSizes.Small" /></div>
+                                    }
+
+                                    @if (ViewState.Product.TimeProduct.ExpirationOptions.HasFlag(ProductTimeExpirationOptionType.ExpiresAtLogout))
+                                    {
+                                        <div class="giz-product-expiration">@LocalizationService.GetString("GIZ_PRODUCT_TIME_EXPIRATION_LOGOUT")<Icon SVGIcon="Icons.Info_Client" Size="IconSizes.Small" /></div>
+                                    }
+
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+            @if (@ViewState.Product?.ProductType == ProductType.ProductBundle)
+            {
+                <div class="giz-product-details__product__bundled-products">
+                    @foreach (var product in ViewState.Product.BundledProducts)
+                    {
+                        <ProductDetailsBundledProduct @key="@product.Id" ProductId="@product.Id" Quantity="product.Quantity" />
+                    }
+                </div>
+            }
+            <div class="giz-product-details__product__related">
+                <div class="giz-product-details__product__related__header">
+                    @LocalizationService.GetString("GIZ_SHOP_RELATED_PRODUCTS")
+                </div>
+
+                <div class="giz-product-details__product__related__body">
+                    @if (ViewState.RelatedProducts != null)
+                    {
+                        @foreach (var product in ViewState.RelatedProducts)
+                        {
+                            <ProductCard @key="product.Id" Product="@product" />
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="giz-product-details__order">
+            <GizOrder />
+        </div>
+    </div>
+</div>

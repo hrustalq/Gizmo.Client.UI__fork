@@ -1,0 +1,46 @@
+//============= Scrollbars ===============//
+
+.giz-scrollbar--v {
+    /* Track */
+    &::-webkit-scrollbar-track {
+        background: rgba(246, 251, 253, 0.06);
+    }
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: rgba(246, 251, 253, 0.24);
+    }
+    /* width */
+    &::-webkit-scrollbar {
+        width: 0.8rem;
+    }
+}
+
+.giz-scrollbar-slim--v {
+    /* Track */
+    &::-webkit-scrollbar-track {
+        background: rgba(246, 251, 253, 0.06);
+    }
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: rgba(246, 251, 253, 0.24);
+    }
+    /* width */
+    &::-webkit-scrollbar {
+        width: 0.4rem;
+    }
+}
+
+.giz-scrollbar--h {
+    /* Track */
+    &::-webkit-scrollbar-track {
+        background: rgba(246, 251, 253, 0.06);
+    }
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: rgba(246, 251, 253, 0.24);
+    }
+    /* height */
+    &::-webkit-scrollbar {
+        height: 0.8rem;
+    }
+}

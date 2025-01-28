@@ -1,0 +1,40 @@
+﻿@namespace Gizmo.Client.UI.Components
+@using Gizmo.UI;
+@inherits CustomDOMComponentBase
+
+<div class="@Class @ClassName">
+    <div class="giz-toast__icon">
+        @switch (AlertType)
+        {
+            case AlertTypes.Success:
+
+                <Icon SVGIcon="Icons.Success_Client" />
+
+                break;
+
+            case AlertTypes.Warning:
+
+                <Icon SVGIcon="Icons.Warning_Client" />
+
+                break;
+
+            default:
+            
+                <Icon SVGIcon="Icons.Info_Client" />
+
+                break;
+        }
+    </div>
+    <div class="giz-toast__body">
+        <div class="giz-toast__body__title">
+            @Title
+        </div>
+        <div class="giz-toast__body__text">
+            @((MarkupString)@Text)
+        </div>
+    </div>
+    @if (CanClose)
+    {
+        <IconButton SVGIcon="Icons.Close" Size="ButtonSizes.Small" Class="close-btn" @onclick="OnCloseButtonClickHandler" />
+    }
+</div>

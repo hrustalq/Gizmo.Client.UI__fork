@@ -1,0 +1,52 @@
+﻿@namespace Gizmo.Web.Components
+@inherits ButtonBase
+
+<button class="@Class @ClassName @((!string.IsNullOrEmpty(RightIcon) || RightSVGIcon.HasValue) ? ButtonIconRight : "")"
+        style="@StyleValue @Style"
+        @onclick="@OnClickButtonHandler"
+        @onclick:stopPropagation="@StopPropagation"
+        aria-label="@Label"
+        disabled="@IsDisabled"
+        type="@Type"
+        name="@Name"
+        value="@Value"
+        @ref="@Ref"
+        @attributes="@Attributes"
+        id="@Id">
+
+    <div class="giz-button__progress-wrapper">
+        <div class="giz-button__progress" style="width: @(Progress.ToString(System.Globalization.CultureInfo.InvariantCulture))%"></div>
+    </div>
+
+    <div class="giz-button__content_wrapper" style="@((!string.IsNullOrEmpty(RightIcon) || RightSVGIcon.HasValue) ? "" : "justify-content: center")">
+        @if (!string.IsNullOrEmpty(LeftIcon) || LeftSVGIcon.HasValue)
+        {
+            <Icon Source="@LeftIcon" SVGIcon="LeftSVGIcon" Class="@ButtonIconLeft" Size="@(Size == ButtonSizes.ExtraSmall ? IconSizes.ExtraSmall : 
+                  (Size == ButtonSizes.Small ? IconSizes.Small :
+                  (Size == ButtonSizes.Medium ? IconSizes.Medium :
+                  (Size == ButtonSizes.Large ? IconSizes.Large :
+                  IconSizes.ExtraLarge))))" />
+        }
+
+        <div class="giz-button__content" style="@((!string.IsNullOrEmpty(RightIcon) || RightSVGIcon.HasValue) ? "margin-right: auto;" : "")">
+            @if (ChildContent != null)
+            {
+                @ChildContent
+            }
+            else
+            {
+                @Text
+            }
+        </div>
+
+        @if (!string.IsNullOrEmpty(RightIcon) || RightSVGIcon.HasValue)
+        {
+            <Icon Source="@RightIcon" SVGIcon="RightSVGIcon" Class="@ButtonIconRight" Size="@(Size == ButtonSizes.ExtraSmall ? IconSizes.ExtraSmall : 
+                  (Size == ButtonSizes.Small ? IconSizes.Small :
+                  (Size == ButtonSizes.Medium ? IconSizes.Medium :
+                  (Size == ButtonSizes.Large ? IconSizes.Large :
+                  IconSizes.ExtraLarge))))" />
+        }
+    </div>
+
+</button>

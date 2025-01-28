@@ -1,0 +1,58 @@
+//=============== Quick Launcher ================//
+
+.quick-launcher {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    align-items: center;
+    padding: 0 1.6rem;
+    height: 8.0rem;
+
+    .giz-dock {
+        margin-left: 3.2rem;
+    }
+}
+
+.quick-launcher-switch.giz-button-group {
+    width: 12.0rem;
+    height: 4.8rem;
+    border: 0.1rem solid #0078D2;
+    border-radius: 0.6rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+
+    .giz-button {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        cursor: pointer;
+
+        &.selected {
+            background-color: #0078D2;
+        }
+    }
+}
+
+.giz-dock-item-state {
+    position: absolute;
+    bottom: 0.1rem;
+    width: 100%;
+    height: 0.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #0078D2;
+
+    .giz-spinner {
+        color: #0078D2;
+    }
+}
+
+.running {
+    width: 0.9rem;
+    height: 0.3rem;
+    background-color: #0078D2;
+    border-radius: 0.4rem;
+}

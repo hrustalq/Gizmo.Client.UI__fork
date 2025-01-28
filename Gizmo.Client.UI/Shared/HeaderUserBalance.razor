@@ -1,0 +1,44 @@
+﻿@namespace Gizmo.Client.UI
+@inherits ComponentBase
+@using System.Globalization
+
+@if (_hideBalance)
+{
+    <div class="giz-header__user-menu-item">
+        <div>@LocalizationService.GetString("GIZ_MENU_BALANCE_IS_HIDDEN")</div>
+    </div>
+    <div class="giz-header__user-menu-item">
+        <div class="user-menu-item-button" @onclick="@(() => ToggleBalanceVisibility())">
+            <Icon Size="IconSizes.Small" SVGIcon="Icons.EyeOpen_Client" />
+        </div>
+    </div>
+}
+else
+{
+    <div class="giz-header__user-menu-item">
+        <div class="giz-header__user-menu-item__icon">
+            <Icon Size="IconSizes.Small" SVGIcon="Icons.Info_Client" />
+        </div>
+        <div>@LocalizationService.GetString("GIZ_MENU_TIME_PRODUCT")</div>
+    </div>
+    <div class="giz-header__user-menu-item">
+        <div class="giz-header__user-menu-item__icon">
+            <Icon Size="IconSizes.Small" SVGIcon="Icons.Schedule_Client" />
+        </div>
+        <div>@UserBalanceViewState.Time.ToString("hh\\:mm\\:ss")</div>
+    </div>
+    <div class="giz-header__user-menu-item">
+        <div class="giz-header__user-menu-item__icon">
+            <Points2Icon />
+        </div>
+        <div>@UserBalanceViewState.PointsBalance</div>
+    </div>
+    <div class="giz-header__user-menu-item">
+        <div>@UserBalanceViewState.Balance.ToString("C", CultureInfo.CurrentCulture)</div>
+    </div>
+    <div class="giz-header__user-menu-item">
+        <div class="user-menu-item-button" @onclick="@(() => ToggleBalanceVisibility())">
+            <Icon Size="IconSizes.Small" SVGIcon="Icons.EyeClose_Client" />
+        </div>
+    </div>
+}

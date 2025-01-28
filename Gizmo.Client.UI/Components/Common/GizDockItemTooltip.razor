@@ -1,0 +1,15 @@
+﻿@namespace Gizmo.Client.UI.Components
+@inherits CustomDOMComponentBase
+@using Gizmo.Client.UI.View;
+
+<div class="giz-dock-item-tooltip">
+    <div class="giz-dock-item-tooltip__header">
+        @Executable?.Caption
+    </div>
+    <div class="giz-dock-item-tooltip__body">
+        @Executable?.Description
+    </div>
+    <div class="giz-dock-item-tooltip__actions">
+        <Button Variant="ButtonVariants.Outline" Text="@LocalizationService.GetString("GIZ_GEN_DETAILS")" @onclick="OnClickDetailsButtonHandle" />
+    </div>
+</div>

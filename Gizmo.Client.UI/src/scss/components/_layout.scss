@@ -1,0 +1,17 @@
+//=============== Layout ================//
+
+.giz-container {
+    position: relative;
+    display: grid;
+    grid-template-rows: min-content 1fr;
+    height: 100vh;
+    overflow: hidden;
+
+    .giz-app__header {
+    }
+
+    .giz-app__body {
+        height: 100%;
+        overflow: hidden;
+    }
+}

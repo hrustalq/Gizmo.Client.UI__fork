@@ -1,0 +1,174 @@
+//============= Notifications ===============//
+
+.giz-notifications {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    width: calc(100vw - 2rem);
+    max-height: calc(100vh - 2rem);
+    border-radius: 0.4rem;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: min-content 1fr;
+    background-color: #22272B;
+    //z-index: $notifications-index;
+
+    &.prerender {
+        max-height: unset;
+        opacity: 0;
+
+        .giz-notifications__body {
+            overflow: unset;
+        }
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.8rem 1.2rem 1rem 0.8rem;
+        background: rgba(255, 255, 255, 0.0326);
+        //Font
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    &__body {
+        max-height: 100%;
+        overflow: auto;
+    }
+
+    &.slide-in {
+        animation-duration: 1s;
+        animation-name: notifications-slide-in-anim;
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: forwards;
+    }
+
+    &.slide-out {
+        animation-duration: 1s;
+        animation-name: notifications-slide-out-anim;
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: forwards;
+    }
+}
+
+.giz-notification {
+    display: grid;
+    grid-template-columns: min-content 1fr min-content;
+    gap: 1.5rem;
+    width: 100%;
+    overflow: hidden;
+    padding-top: 1.3rem;
+    padding-bottom: 1.5rem;
+
+    &__icon {
+        width: 5.3rem;
+        padding-top: 0.3rem;
+        padding-left: 1.6rem;
+    }
+
+    &__body {
+        display: grid;
+        grid-template-rows: min-content 1fr min-content;
+
+        &__title {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            //Font
+            font-weight: 700;
+            font-size: 1.6rem;
+            line-height: 2.6rem;
+        }
+
+        &__message {
+            width: 100%;
+            overflow: hidden;
+            white-space: normal;
+            //Font
+            font-weight: 400;
+            font-size: 1.6rem;
+            line-height: 2.6rem;
+        }
+
+        &__actions {
+            margin-top: 1.6rem;
+        }
+    }
+
+    &__close-button {
+        padding: 0 1.2rem;
+    }
+
+    &-wrapper {
+        overflow: hidden;
+        border-bottom: 1px solid rgba(246, 251, 253, 0.06);
+
+        &.tmp {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            visibility: hidden;
+        }
+
+        &:last-child {
+            border-bottom: unset;
+        }
+
+        &.slide-in {
+            height: 0;
+            animation-duration: 0.5s;
+            animation-name: notification-slide-in-anim;
+            animation-timing-function: ease-in-out;
+            animation-fill-mode: forwards;
+        }
+
+        &.slide-out {
+            animation-duration: 0.5s;
+            animation-name: notification-slide-out-anim;
+            animation-timing-function: ease-in-out;
+            animation-fill-mode: forwards;
+        }
+    }
+}
+
+@keyframes notifications-slide-in-anim {
+    from {
+        margin-top: -100%;
+    }
+    to {
+        margin-top: 0%;
+    }
+}
+
+@keyframes notifications-slide-out-anim {
+    from {
+        margin-top: 0%;
+    }
+
+    to {
+        margin-top: -100%;
+    }
+}
+
+@keyframes notification-slide-in-anim {
+    from {
+        height: 0;
+    }
+    to {
+        height: var(--notification-height);
+    }
+}
+
+@keyframes notification-slide-out-anim {
+    from {
+        height: var(--notification-height);
+    }
+    to {
+        height: 0;
+    }
+}

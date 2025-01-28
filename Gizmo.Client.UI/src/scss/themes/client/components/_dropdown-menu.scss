@@ -1,0 +1,14 @@
+//============= Client UI Sub Dropdown Menu ===========//
+
+.giz-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: $header-dropdown-index;
+    height: calc(100vh - 100%);
+
+    &.open {
+        display: block;
+    }
+}

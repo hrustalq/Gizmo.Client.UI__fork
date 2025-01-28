@@ -1,0 +1,61 @@
+﻿@namespace Gizmo.Client.UI.Components
+@inherits ComponentBase
+
+@switch (_imageResultStatusCode)
+{
+    //Loading
+    case 0:
+    {
+        if (LoadingPlaceholder is not null)
+        {
+            @LoadingPlaceholder
+        }
+        else
+        {
+            <span class="giz-image-loading--wrapper">
+                <span class="giz-image-loading--activity"/>
+            </span>
+        }
+
+        break;
+    }
+    //EmptyResult
+    case 1:
+    {
+        if (EmptyResultPlaceholder is not null)
+        {
+            @EmptyResultPlaceholder
+        }
+        else
+        {
+            <span style="display:flex;justify-content:center">
+                Image is empty.
+            </span>
+        }
+        
+        break;
+    }
+    //Error
+    case 2:
+    {
+        if (ErrorPlaceholder is not null)
+        {
+            @ErrorPlaceholder
+        }
+        else
+        {
+            <span style="display:flex;justify-content:center">
+                Image loading error.
+            </span>
+        }
+
+        break;
+    }
+    //Success
+    case 3:
+    {
+        <img src="@_imageSource" class="@ImageClassName" loading="lazy" alt="image" />
+        break;
+    }
+}
+

@@ -1,0 +1,12 @@
+﻿@namespace Gizmo.Client.UI.Shared
+@inherits CustomDOMComponentBase
+
+<div @ref="@Ref"
+     class="giz-dialog @(ViewState.HasDialog ? "giz-dialog--open" : "")"
+     tabindex="-1"
+     @onclick="OnClickDialogHandler">
+    @if (ViewState.HasDialog)
+    {
+        <DynamicComponent Type="ViewState.Current.ComponentType" Parameters="ViewState.Current.Parameters" />
+    }
+</div>
